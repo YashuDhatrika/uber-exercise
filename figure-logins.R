@@ -43,6 +43,7 @@ viz <- list(
     ggtitle("selected days")+
     guides(color="none")+
     geom_line(aes(hours.past.midnight, logins, showSelected=date.str,
+                  clickSelects=date.str,
                   color=is.weekend,
                   group=date.str),
               data=all.intervals),
