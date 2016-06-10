@@ -34,13 +34,17 @@ all.intervals[, date.str := strftime(min.time, "%Y-%m-%d")]
 all.intervals[, hours.num := as.numeric(strftime(min.time, "%H"))]
 all.intervals[, minutes.num := as.numeric(strftime(min.time, "%M"))]
 all.intervals[, hours.past.midnight := hours.num + minutes.num/60]
+all.intervals[, week := as.numeric(strftime(min.time, "%V"))]
+all.intervals[, weekday.str := strftime(min.time, "%A")]
+all.intervals[, weekday := factor(weekday.str, weekday.levs)]
 ggplot()+
   geom_line(aes(min.time, logins),
             data=all.intervals)
 
-days <- logins.dt[, list(
-  logins=.N
-  ), by=.(date.str, week, weekday)]
+days <- all.intervals[, list(
+  logins=sum(logins),
+  intervals=.N
+  ), by=.(date.str, weekday, week)]
 ggplot()+
   coord_equal()+
   scale_fill_gradient(low="white", high="blue")+
