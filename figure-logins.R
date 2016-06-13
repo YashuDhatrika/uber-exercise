@@ -30,7 +30,8 @@ viz <- list(
     theme_bw()+
     ggtitle("logins per day, select days")+
     coord_equal()+
-    scale_fill_gradient(low="white", high="blue", limits=c(0, max(days$logins)))+
+    scale_fill_gradient(
+      low="white", high="blue", limits=c(0, max(days$logins)))+
     geom_tile(aes(week, weekday, fill=logins, clickSelects=date.str,
                   tooltip=paste(
                     logins,
