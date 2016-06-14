@@ -1,0 +1,4 @@
+** 14 June 2016
+
+- [[file:figure-logins.R]] makes http://cbio.ensmp.fr/~thocking/uber-exercise/figure-logins/
+- [[file:poisson.model.R]] makes http://cbio.ensmp.fr/~thocking/uber-exercise/figure-poisson-model/
