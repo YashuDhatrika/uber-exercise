@@ -138,14 +138,14 @@ prediction functions $g_1$ and $g_2$ with
 $\text{MSE}(g_1)<\text{MSE}(g_2)$ then we can conclude that $g_1$ is
 better for prediction.
 
-More generally, this method is limited by the definition of the input
-features $\mathbf x_i$, which must be done by a human. So actually a
-human must do some manual pattern recognition to determine which
-features to compute for the model. In the future it would be
-preferable to use another model which does not depend on human
-learning. For example, the spectral mixture kernel is a Bayesian
-non-parametric forecasting method that does not need manual feature or
-kernel engineering:
+\textbf{Future work:} the main drawback of this method is that it is
+limited by the definition of the input features $\mathbf x_i$, which
+must be done by a human. So actually a human must do some manual
+pattern recognition to determine which features to compute for the
+model. In the future it would be preferable to use another model which
+does not depend on human learning. For example, the spectral mixture
+kernel is a Bayesian non-parametric forecasting method that does not
+need manual feature or kernel engineering:
 
 \url{https://arxiv.org/abs/1302.4245}
 
@@ -166,6 +166,38 @@ expect one-half of the data points to fall in the range. If there are
 two different methods for computing 50\% confidence bands, then we
 should prefer whichever gets closer to that quantity empirically on
 the test set.
+
+\section{Menu enumeration}
+
+I wrote the \texttt{all.possible.menus} function in R. 
+
+Input: ``the number of cuisines and the number of dishes available
+within each cuisine'' which I represent in R as a named integer
+vector, one element for each cuisine.
+
+Output: ``all possible menus'' which I represent in R as a character
+vector, one element for each menu.
+
+Implementation details: first I check the inputs and stop with an
+error if any of the following checks is not satisfied:
+\begin{itemize}
+\item the input is an integer vector.
+\item each element of the input vector is positive.
+\item the input names are a character vector (not NULL).
+\item the names each have 1 letter.
+\end{itemize}
+Then I construct \texttt{dishes.by.cuisine} which is a named list of
+character vectors. There is a list elements for each
+cuisine, and the character vector size is the number of
+dishes in each cuisine. List names are cuisine names (for example
+``A'') and elements of the character vectors are dishes (for example
+``A2'').  The base R \texttt{expand.grid} function is used to get a
+data.frame with one row for each menu, which is then converted to a
+character vector with \texttt{paste(collapse=" ")}.
+
+Tests: I used the \texttt{testthat} package to make sure that the
+\texttt{all.possible.menus} function gives the correct output for
+valid inputs, and errors for invalid inputs.
 
 \section{Appendix: source code}
 
